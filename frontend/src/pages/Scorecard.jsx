@@ -54,7 +54,6 @@ const Scorecard = () => {
         )}
       </div>
 
-      {/* Header Match Information */}
       <div className="card" style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
           <h1 style={{ fontSize: '1.6rem', fontWeight: 800 }}>{teamA} vs {teamB}</h1>
@@ -72,7 +71,6 @@ const Scorecard = () => {
         </div>
       </div>
 
-      {/* Innings Scorecard Tabs & Tables */}
       {(!inningsScorecards || inningsScorecards.length === 0) ? (
         <div className="card" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-subtle)' }}>
           No innings scored yet for this match.

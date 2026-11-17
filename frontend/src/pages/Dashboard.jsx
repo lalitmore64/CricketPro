@@ -29,7 +29,6 @@ const Dashboard = () => {
         </button>
       </div>
 
-      {/* Metrics Cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', marginBottom: '2rem' }}>
         <div className="card" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <div style={{ padding: '0.8rem', borderRadius: '12px', backgroundColor: 'rgba(59, 130, 246, 0.15)', color: 'var(--accent-blue)' }}>
@@ -72,7 +71,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Live Matches Section */}
       {liveMatches.length > 0 && (
         <div style={{ marginBottom: '2.5rem' }}>
           <h2 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -87,7 +85,6 @@ const Dashboard = () => {
         </div>
       )}
 
-      {/* All / Recent Matches Section */}
       <div>
         <h2 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: '1rem' }}>All Matches</h2>
         {matches.length === 0 ? (

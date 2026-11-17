@@ -1,62 +1,103 @@
-# 🏏 Cricket Live Scoring & Analytics Platform
+# Cricket Live Scoring Platform
 
-A complete, production-grade fullstack **Cricket Live Scoring and Analytics Platform** built with **Java 21**, **Spring Boot 3.3**, **Spring Data JPA**, **REST APIs**, and a **React 18 + Vite** dashboard with an **AI-powered match summary engine**.
-
----
-
-## 🌟 Features
-
-- **Team & Player Management**: Complete CRUD operations for teams and player roles (`BATSMAN`, `BOWLER`, `ALL_ROUNDER`, `WICKET_KEEPER`).
-- **Match Lifecycle Control**: Fixture scheduling, starting matches, innings setup, and status transitions (`UPCOMING`, `LIVE`, `COMPLETED`).
-- **Real-Time Cricket Scoring Engine**:
-  - **Runs & Boundaries**: `0, 1, 2, 3, 4` (Fours), `6` (Sixes).
-  - **Extras Calculation**: `WIDE`, `NO_BALL`, `BYE`, `LEG_BYE` with penalty and boundary calculations.
-  - **Automatic Strike Rotation**: Mid-over rotation on odd completed runs and automatic end-of-over strike swap.
-  - **Over Calculations**: Internal legal ball tracking, exact `"X.Y"` overs format conversion, and consecutive bowler restrictions.
-  - **Wicket Dismissals**: `BOWLED`, `CAUGHT`, `LBW`, `RUN_OUT`, `STUMPED`, `HIT_WICKET`, `RETIRED_HURT`.
-  - **Live Scorecards**: Auto-calculates strike rates, economy rates, fours/sixes, balls faced, and bowling figures.
-- **AI Match Analytics Summary**: Post-match analysis service generating match summaries, key highlights, turning points, and top performer insights.
-- **Modern Clean UI**: High-contrast, crisp dashboard design with light/dark theme support.
+A fullstack cricket live scoring and analytics platform built with Java 21, Spring Boot 3.3, Spring Data JPA, and a React + Vite frontend. Includes a match summary engine powered by AI or rule-based fallback.
 
 ---
 
-## 🛠️ Technology Stack
+## Features
+
+- Team and player management with role-based classification (Batsman, Bowler, All-Rounder, Wicket Keeper)
+- Match lifecycle management with status transitions (Upcoming → Live → Completed)
+- Ball-by-ball scoring engine with support for runs, boundaries, extras (Wide, No Ball, Bye, Leg Bye), wickets, and automatic strike rotation
+- Over tracking with legal ball counting, overs format conversion, and consecutive bowler restrictions
+- Dismissal types: Bowled, Caught, LBW, Run Out, Stumped, Hit Wicket, Retired Hurt
+- Live scorecards with strike rates, economy rates, and bowling figures
+- Post-match AI summary with highlights, turning points, and player insights
+- Clean responsive UI with light/dark theme support
+
+---
+
+## Tech Stack
 
 ### Backend
-- **Java**: 21 LTS
-- **Framework**: Spring Boot 3.3.4 (Spring Web, Spring Data JPA, Jakarta Validation)
-- **Database**: H2 (In-memory default) / MySQL 8.x
-- **Build Tool**: Maven
+- Java 21 LTS
+- Spring Boot 3.3.4 (Spring Web, Spring Data JPA, Jakarta Validation)
+- H2 (in-memory default) / MySQL 8.x
+- Maven
 
 ### Frontend
-- **Framework**: React 18
-- **Build Tool**: Vite
-- **Routing**: React Router DOM v6
-- **HTTP Client**: Axios
-- **Icons**: Lucide React
+- React 19 + Vite
+- React Router DOM v7
+- Axios
+- Lucide React (icons)
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
-```text
-Cricket App/
-├── src/                          # Spring Boot Backend (Java 21)
-│   └── main/java/com/cricket/scoring
-│       ├── config/               # CorsConfig & RestClient configs
-│       ├── controller/           # REST Controllers
-│       ├── dto/                  # Request & Response DTOs
-│       ├── entity/               # JPA Entities
-│       ├── enums/                # Domain Enums
-│       ├── exception/            # Global Exception Handler
-│       ├── repository/           # Spring Data JPA Repositories
-│       └── service/              # Transactional Scoring Logic
-├── frontend/                     # React 18 + Vite Frontend
+```
+CricketPro/
+├── backend/                        # Spring Boot Backend
+│   ├── src/main/java/com/cricket/scoring
+│   │   ├── config/                 # CORS configuration
+│   │   ├── controller/             # REST controllers
+│   │   ├── dto/                    # Request and response DTOs
+│   │   ├── entity/                 # JPA entities
+│   │   ├── enums/                  # Domain enums
+│   │   ├── exception/              # Exception handling
+│   │   ├── mapper/                 # Entity-DTO mappers
+│   │   ├── repository/             # Spring Data JPA repositories
+│   │   ├── service/                # Business logic
+│   │   └── util/                   # Utility classes
+│   ├── src/main/resources/         # Application config
+│   ├── src/test/                   # Unit tests
+│   ├── pom.xml
+│   └── Dockerfile
+├── frontend/                       # React + Vite Frontend
 │   └── src/
-│       ├── api/                  # Axios Services
-│       ├── components/           # UI Components & Live Controls
-│       ├── hooks/                # Custom React Hooks
-│       └── pages/                # Dashboard, Match, Live Scoring & Scorecard Pages
-├── pom.xml                       # Maven Configuration
-├── README.md                     # Project Documentation
-└── .gitignore                    # Git Exclusion Rules
+│       ├── api/                    # Axios API services
+│       ├── components/             # UI components
+│       ├── hooks/                  # Custom React hooks
+│       └── pages/                  # Page components
+├── .gitignore
+└── README.md
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Java 21
+- Maven
+- Node.js 18+
+
+### Run the Backend
+```bash
+cd backend
+mvn spring-boot:run
+```
+Backend starts at `http://localhost:8080`
+
+### Run the Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Frontend starts at `http://localhost:5173`
+
+### Environment Variables
+
+**Frontend** (`frontend/.env`):
+```
+VITE_API_BASE_URL=http://localhost:8080/api
+```
+
+**Backend** (`backend/src/main/resources/application.properties`):
+```
+DB_URL          - JDBC database URL (defaults to H2 in-memory)
+DB_USERNAME     - Database username
+DB_PASSWORD     - Database password
+AI_API_KEY      - OpenAI API key (optional, falls back to rule-based summary)
+```

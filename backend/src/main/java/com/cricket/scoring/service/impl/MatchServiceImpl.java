@@ -119,7 +119,6 @@ public class MatchServiceImpl implements MatchService {
         }
 
         match.setStatus(MatchStatus.COMPLETED);
-        // Also complete all active innings
         for (Innings innings : match.getInningsList()) {
             if (innings.getStatus() == InningsStatus.IN_PROGRESS) {
                 innings.setStatus(InningsStatus.COMPLETED);
@@ -140,7 +139,6 @@ public class MatchServiceImpl implements MatchService {
             throw new MatchAlreadyCompletedException("Cannot create innings for completed match with ID: " + matchId);
         }
 
-        // Auto-transition match status to LIVE if UPCOMING
         if (match.getStatus() == MatchStatus.UPCOMING) {
             match.setStatus(MatchStatus.LIVE);
             matchRepository.save(match);
@@ -202,7 +200,6 @@ public class MatchServiceImpl implements MatchService {
                 .map(InningsMapper::toResponse)
                 .toList();
 
-        // Get latest active innings scoreboard if available
         ScoreboardResponse currentScoreboard = null;
         List<BallResponse> ballHistory = List.of();
 

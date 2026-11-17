@@ -101,11 +101,9 @@ public class ScoringServiceImpl implements ScoringService {
 
         Ball savedBall = ballRepository.save(ball);
 
-        // Check if over completed or target/wickets reached to close innings
         checkInningsCompletion(innings);
         inningsRepository.save(innings);
 
-        // Determine current effective striker/nonStriker for response
         Player effectiveStriker = striker;
         Player effectiveNonStriker = nonStriker;
 
@@ -220,7 +218,6 @@ public class ScoringServiceImpl implements ScoringService {
             throw new InvalidScoringException("Bowler " + bowler.getName() + " does not belong to bowling team " + innings.getBowlingTeam().getName());
         }
 
-        // Validate dismissed batsmen cannot bat
         battingScorecardRepository.findByInningsIdAndPlayerId(innings.getId(), striker.getId())
                 .ifPresent(card -> {
                     if (Boolean.TRUE.equals(card.getIsOut())) {
@@ -237,7 +234,6 @@ public class ScoringServiceImpl implements ScoringService {
     }
 
     private void validateBowlerOver(Innings innings, Player currentBowler) {
-        // If start of new over (legalBalls > 0 and legalBalls % 6 == 0)
         int legalBalls = innings.getLegalBalls();
         if (legalBalls > 0 && legalBalls % 6 == 0) {
             Optional<Ball> lastBallOpt = ballRepository.findTopByInningsIdOrderByIdDesc(innings.getId());
@@ -282,7 +278,6 @@ public class ScoringServiceImpl implements ScoringService {
         } else if (extraType == ExtraType.BYE || extraType == ExtraType.LEG_BYE) {
             strikerCard.setBallsFaced(strikerCard.getBallsFaced() + 1);
         }
-        // WIDE does not increment batsman runs or ballsFaced
         battingScorecardRepository.save(strikerCard);
     }
 
@@ -300,7 +295,6 @@ public class ScoringServiceImpl implements ScoringService {
         } else if (extraType == ExtraType.NONE) {
             bowlerCard.setRunsConceded(bowlerCard.getRunsConceded() + runsOffBat);
         }
-        // Byes and Leg-Byes are not charged to bowler's runsConceded
         bowlingScorecardRepository.save(bowlerCard);
     }
 

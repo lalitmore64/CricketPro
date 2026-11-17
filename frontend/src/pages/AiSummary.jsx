@@ -77,7 +77,6 @@ const AiSummary = () => {
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          {/* Match Summary Statement */}
           <div className="card" style={{ borderLeft: '4px solid var(--primary)' }}>
             <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--primary)' }}>
               Executive Match Summary
@@ -87,7 +86,6 @@ const AiSummary = () => {
             </p>
           </div>
 
-          {/* Highlights */}
           {summaryData.highlights && summaryData.highlights.length > 0 && (
             <div className="card">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
@@ -113,7 +111,6 @@ const AiSummary = () => {
             </div>
           )}
 
-          {/* Turning Points */}
           {summaryData.turningPoints && summaryData.turningPoints.length > 0 && (
             <div className="card">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
@@ -139,7 +136,6 @@ const AiSummary = () => {
             </div>
           )}
 
-          {/* Player Insights */}
           {summaryData.playerInsights && summaryData.playerInsights.length > 0 && (
             <div className="card">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>

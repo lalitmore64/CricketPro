@@ -132,7 +132,6 @@ const MatchDetails = () => {
 
   return (
     <div>
-      {/* Header Overview Card */}
       <div className="card" style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
           <MatchStatus status={status} />
@@ -152,7 +151,6 @@ const MatchDetails = () => {
           borderRadius: 'var(--radius-lg)',
           marginBottom: '1.5rem'
         }}>
-          {/* Team A */}
           <div style={{ textAlign: 'center' }}>
             <h2 style={{ fontSize: '1.8rem', fontWeight: 800 }}>{teamA?.name}</h2>
             <span style={{ fontSize: '0.9rem', color: 'var(--primary)', fontWeight: 700 }}>{teamA?.shortName}</span>
@@ -169,7 +167,6 @@ const MatchDetails = () => {
 
           <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-subtle)' }}>VS</div>
 
-          {/* Team B */}
           <div style={{ textAlign: 'center' }}>
             <h2 style={{ fontSize: '1.8rem', fontWeight: 800 }}>{teamB?.name}</h2>
             <span style={{ fontSize: '0.9rem', color: 'var(--accent-blue)', fontWeight: 700 }}>{teamB?.shortName}</span>
@@ -195,7 +192,6 @@ const MatchDetails = () => {
         </div>
       </div>
 
-      {/* Direct Live Scoring & Analytics Control Panel */}
       <div className="card">
         <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.25rem' }}>
           Live Scoring & Analytics Hub
@@ -238,7 +234,6 @@ const MatchDetails = () => {
         </div>
       </div>
 
-      {/* Quick Add Player Modal */}
       {isPlayerModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -293,7 +288,6 @@ const MatchDetails = () => {
         </div>
       )}
 
-      {/* Innings Setup Modal */}
       {isInningsModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">

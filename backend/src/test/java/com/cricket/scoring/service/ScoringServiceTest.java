@@ -94,7 +94,6 @@ class ScoringServiceTest {
     @Test
     @DisplayName("Test normal run scoring (4s, 6s, singles) & strike rotation")
     void testNormalRunScoring() {
-        // Ball 0.1: Rohit hits 4
         BallRequest ball1 = BallRequest.builder()
                 .strikerId(rohit.getId())
                 .nonStrikerId(kohli.getId())
@@ -111,7 +110,6 @@ class ScoringServiceTest {
         assertEquals(4, score1.getStriker().getRuns());
         assertEquals(1, score1.getStriker().getFours());
 
-        // Ball 0.2: Rohit scores 1 (strike swaps to Kohli)
         BallRequest ball2 = BallRequest.builder()
                 .strikerId(rohit.getId())
                 .nonStrikerId(kohli.getId())
@@ -144,7 +142,7 @@ class ScoringServiceTest {
         ScoreboardResponse response = scoringService.recordBall(innings.getId(), wideBall);
 
         assertEquals("1/0", response.getScore());
-        assertEquals("0.0", response.getOvers()); // Still 0.0 overs
+        assertEquals("0.0", response.getOvers());
         assertEquals(1, response.getBowler().getWides());
         assertEquals(1, response.getBowler().getRunsConceded());
     }
@@ -152,7 +150,6 @@ class ScoringServiceTest {
     @Test
     @DisplayName("Test No-Ball adds penalty and credits batsman runs")
     void testNoBallDelivery() {
-        // No ball with 4 runs from bat = 5 total runs (4 to batsman, 1 extra)
         BallRequest noBall = BallRequest.builder()
                 .strikerId(rohit.getId())
                 .nonStrikerId(kohli.getId())
@@ -166,7 +163,7 @@ class ScoringServiceTest {
         ScoreboardResponse response = scoringService.recordBall(innings.getId(), noBall);
 
         assertEquals("5/0", response.getScore());
-        assertEquals("0.0", response.getOvers()); // No ball does not increase legal ball count
+        assertEquals("0.0", response.getOvers());
         assertEquals(4, response.getStriker().getRuns());
         assertEquals(1, response.getBowler().getNoBalls());
         assertEquals(5, response.getBowler().getRunsConceded());
@@ -189,9 +186,9 @@ class ScoringServiceTest {
 
         assertEquals("2/0", response.getScore());
         assertEquals("0.1", response.getOvers());
-        assertEquals(0, response.getStriker().getRuns()); // Batsman gets 0 runs
-        assertEquals(1, response.getStriker().getBallsFaced()); // Faced 1 ball
-        assertEquals(0, response.getBowler().getRunsConceded()); // Bowler charged 0 runs
+        assertEquals(0, response.getStriker().getRuns());
+        assertEquals(1, response.getStriker().getBallsFaced());
+        assertEquals(0, response.getBowler().getRunsConceded());
     }
 
     @Test
@@ -217,7 +214,6 @@ class ScoringServiceTest {
     @Test
     @DisplayName("Test bowler cannot bowl consecutive overs")
     void testConsecutiveOverRestriction() {
-        // Bowl 6 legal balls by Starc to complete over 1
         for (int i = 0; i < 6; i++) {
             scoringService.recordBall(innings.getId(), BallRequest.builder()
                     .strikerId(rohit.getId())
@@ -229,7 +225,6 @@ class ScoringServiceTest {
                     .build());
         }
 
-        // Try to bowl ball 1 of over 2 by Starc again (should throw InvalidScoringException)
         BallRequest over2Ball1 = BallRequest.builder()
                 .strikerId(kohli.getId())
                 .nonStrikerId(rohit.getId())

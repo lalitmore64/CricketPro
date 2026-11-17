@@ -1,27 +1,23 @@
-# Maven build output
+# Maven
 target/
 *.class
 
-# IntelliJ IDEA project settings
+# IntelliJ IDEA
 .idea/
 *.iws
 *.iml
 *.ipr
 out/
 
-# Node dependencies and build output
+# Node
 node_modules/
-frontend/node_modules/
-frontend/dist/
-frontend/.env.local
+dist/
 
-# Ignore all README and Markdown documentation files
-*.md
-README.md
-frontend/README.md
-src/README.md
+# Environment files
+.env.local
+.env.*.local
 
-# Logs and temporary files
+# Logs and temp files
 *.log
 .mvn/
 .DS_Store

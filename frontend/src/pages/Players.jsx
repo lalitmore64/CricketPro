@@ -86,7 +86,6 @@ const Players = () => {
         </button>
       </div>
 
-      {/* Filter Bar */}
       <div className="card" style={{ marginBottom: '1.5rem', padding: '1rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <Filter size={18} color="var(--text-muted)" />
@@ -163,7 +162,6 @@ const Players = () => {
         </div>
       )}
 
-      {/* Add / Edit Player Modal */}
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -234,7 +232,6 @@ const Players = () => {
         </div>
       )}
 
-      {/* Delete Confirmation */}
       <ConfirmModal
         isOpen={Boolean(deletingId)}
         title="Delete Player"

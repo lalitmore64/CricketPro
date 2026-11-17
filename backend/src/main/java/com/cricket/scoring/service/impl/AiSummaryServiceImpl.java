@@ -46,16 +46,14 @@ public class AiSummaryServiceImpl implements AiSummaryService {
     public AiSummaryResponse generateMatchSummary(Long matchId) {
         MatchScorecardResponse scorecard = matchService.getMatchScorecard(matchId);
 
-        // Try AI API generation if API Key is configured and not default
         if (apiKey != null && !apiKey.isBlank() && !"demo-key".equalsIgnoreCase(apiKey)) {
             try {
                 return callAiApi(scorecard);
             } catch (Exception e) {
-                log.warn("AI API call failed ({}). Falling back to rule-based match analytics engine.", e.getMessage());
+                log.warn("API call failed ({}). Generating summary from match data.", e.getMessage());
             }
         }
 
-        // Rule-based dynamic summary fallback
         return generateFallbackSummary(scorecard);
     }
 
@@ -118,7 +116,6 @@ public class AiSummaryServiceImpl implements AiSummaryService {
         InningsResponse innings1 = inningsList.get(0);
         InningsResponse innings2 = inningsList.size() > 1 ? inningsList.get(1) : null;
 
-        // Collect Top Batsmen
         List<BattingStatResponse> allBatsmen = new ArrayList<>();
         for (InningsResponse inn : inningsList) {
             if (inn.getBattingScorecard() != null) {
@@ -127,7 +124,6 @@ public class AiSummaryServiceImpl implements AiSummaryService {
         }
         allBatsmen.sort(Comparator.comparingInt(BattingStatResponse::getRuns).reversed());
 
-        // Collect Top Bowlers
         List<BowlingStatResponse> allBowlers = new ArrayList<>();
         for (InningsResponse inn : inningsList) {
             if (inn.getBowlingScorecard() != null) {
@@ -137,7 +133,6 @@ public class AiSummaryServiceImpl implements AiSummaryService {
         allBowlers.sort(Comparator.comparingInt(BowlingStatResponse::getWickets).reversed()
                 .thenComparingInt(BowlingStatResponse::getRunsConceded));
 
-        // Generate Highlights & Insights
         if (!allBatsmen.isEmpty()) {
             BattingStatResponse topBat = allBatsmen.get(0);
             highlights.add(topBat.getName() + " top-scored with " + topBat.getRuns() + " runs (" + topBat.getBallsFaced() + " balls, " + topBat.getFours() + "x4, " + topBat.getSixes() + "x6).");

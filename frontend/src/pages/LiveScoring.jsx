@@ -134,21 +134,18 @@ const LiveScoring = () => {
 
       {scoringError && <ErrorMessage message={scoringError} />}
 
-      {/* Top Scoreboard Banner */}
       <LiveScoreCard
         scoreboard={scoreboard}
         battingTeamName={innings.battingTeam?.name}
         bowlingTeamName={innings.bowlingTeam?.name}
       />
 
-      {/* Current Striker / Non-Striker / Bowler Stats */}
       <Scoreboard
         striker={scoreboard?.striker}
         nonStriker={scoreboard?.nonStriker}
         bowler={scoreboard?.bowler}
       />
 
-      {/* Player Selection Selectors */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
         <PlayerSelector
           title="Active Striker"
@@ -177,7 +174,6 @@ const LiveScoring = () => {
         />
       </div>
 
-      {/* Ball-by-ball Scoring Controls */}
       <ScoringPanel
         onRecordBall={handleRecordBall}
         striker={striker}
@@ -185,7 +181,6 @@ const LiveScoring = () => {
         bowler={bowler}
       />
 
-      {/* Recent Deliveries List */}
       <BallHistory balls={balls} />
     </div>
   );

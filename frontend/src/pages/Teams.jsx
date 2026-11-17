@@ -120,7 +120,6 @@ const Teams = () => {
         ))}
       </div>
 
-      {/* Add / Edit Team Modal */}
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -172,7 +171,6 @@ const Teams = () => {
         </div>
       )}
 
-      {/* Delete Confirmation */}
       <ConfirmModal
         isOpen={Boolean(deletingId)}
         title="Delete Team"

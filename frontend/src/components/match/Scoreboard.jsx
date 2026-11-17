@@ -9,7 +9,6 @@ const Scoreboard = ({ striker, nonStriker, bowler }) => {
       gap: '1.25rem',
       marginBottom: '1.5rem'
     }}>
-      {/* Striker Card */}
       <div className="card" style={{
         border: '2px solid var(--primary)',
         boxShadow: '0 4px 14px var(--primary-glow)',
@@ -39,7 +38,6 @@ const Scoreboard = ({ striker, nonStriker, bowler }) => {
         </div>
       </div>
 
-      {/* Non-Striker Card */}
       <div className="card">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-subtle)', letterSpacing: '0.05em' }}>
@@ -64,7 +62,6 @@ const Scoreboard = ({ striker, nonStriker, bowler }) => {
         </div>
       </div>
 
-      {/* Bowler Card */}
       <div className="card" style={{ borderLeft: '4px solid var(--accent-blue)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-blue)', letterSpacing: '0.05em' }}>
